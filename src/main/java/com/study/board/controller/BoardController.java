@@ -27,11 +27,17 @@ public class BoardController {
 
     @PostMapping("/board/writepro")
     //public String boardWritePro(@RequestParam(name = "title") String title, @RequestParam(name = "content") String content) // 1. 데이터 넘어오는걸 먼저 확인
-    public String boardWritePro(Board board) {
+    public String boardWritePro(Board board, Model model) {
 
         //System.out.println(board.getTitle());
         boardService.write(board); //@Autowired쓰고 주입시켜주면 에러사라짐
-        return "";
+
+        model.addAttribute("message", "글 작성이 완료되었습니다.");
+
+        model.addAttribute("searchUrl", "/board/list");
+
+
+        return "message";
     }
 
     @GetMapping("/board/list")
